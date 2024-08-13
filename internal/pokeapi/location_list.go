@@ -64,12 +64,9 @@ func (c *Client) ListLocationPokemon(userInputLocation string) (RespLocationPoke
 		if err != nil {
 			return RespLocationPokemons{}, err
 		}
-		
+
 		return pokemonResp, nil
-
 	}
-
-
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -97,5 +94,4 @@ func (c *Client) ListLocationPokemon(userInputLocation string) (RespLocationPoke
 	c.cache.Add(url, dat)
 
 	return pokemonResp ,nil
-
 }

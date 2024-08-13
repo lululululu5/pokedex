@@ -9,6 +9,9 @@ import (
 func main() {
 	cfg := config{
 		pokeapiClient: pokeapi.NewClient(time.Hour),
+		pokedex: pokeapi.Pokedex{
+			Pokemons: make(map[string]pokeapi.Pokemon),
+		},
 	}
 	
 	startRepl(&cfg)
