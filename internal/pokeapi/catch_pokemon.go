@@ -6,28 +6,12 @@ import (
 	"net/http"
 )
 
-type Pokedex struct{
-	Pokemons map[string]Pokemon
-}
-
-type Pokemon struct{
-	Name string
-	BaseExperience int
-
-}
-
-type RespPokemon struct{
-	BaseExperience int `json:"base_experience"`
-	Name string `json:"name"`
-}
-
 func (c *Client) GetPokemonInfo(userInputPokemon string) (RespPokemon, error) {
 	url := baseURL + "/pokemon/" + userInputPokemon
 
 	// add caching
 	dat, ok := c.cache.Get(url)
 	if ok {
-		println("EXISTING CACHE")
 		pokemonData := RespPokemon{}
 		err := json.Unmarshal(dat, &pokemonData)
 		if err != nil {
@@ -36,7 +20,6 @@ func (c *Client) GetPokemonInfo(userInputPokemon string) (RespPokemon, error) {
 
 		return pokemonData, err
 	}
-	println("NO CACHING")
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {

@@ -28,12 +28,24 @@ func commandCatch(cfg *config, input string) error {
 	if userLevel > rand.IntN(pokemonExperience) {
 		fmt.Printf("%s was caught!\n", userInputPokemon)
 		if _, ok := cfg.pokedex.Pokemons[RespPokemon.Name]; !ok {
+			stats := make(map[string]int)
+			for _,val := range RespPokemon.Stats {
+				stats[val.Stat.Name] = val.BaseStat 
+			}
+			types := []string{}
+			for _,val := range RespPokemon.Types {
+				types = append(types, val.Type.Name)
+
+			}
 			cfg.pokedex.Pokemons[RespPokemon.Name] = pokeapi.Pokemon{
 				Name: RespPokemon.Name,
 				BaseExperience: RespPokemon.BaseExperience,
+				Weight: RespPokemon.Weight,
+				Height: RespPokemon.Height,
+				Stats: stats,
+				Types: types,
 			}
 		}
-		fmt.Print(cfg.pokedex)
 	} else {
 		fmt.Printf("%s escaped!\n", userInputPokemon)
 	}
