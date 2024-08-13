@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func commandHelp(cfg *config) error {
+func commandHelp(cfg *config, input string) error {
 	fmt.Println()
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
@@ -17,7 +17,7 @@ func commandHelp(cfg *config) error {
 	return nil
 }
 
-func commandExit(cfg *config) error {
+func commandExit(cfg *config, input string) error {
 	os.Exit(0)
 	return nil
 }
